@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="color_block_pose_publisher" type="color_block_pose_publish.py" name="color_block_pose_publisher"  output="screen">
+  </node>
+</launch>
+

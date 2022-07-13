@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="aruco_block_pose_publisher" type="aruco_block_pose_publish.py" name="aruco_block_pose_publisher"  output="screen">
+  </node>
+</launch>
+
