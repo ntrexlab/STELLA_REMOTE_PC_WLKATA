@@ -9,6 +9,8 @@
 	</include>
 	<include file="$(find aruco_block_pose_publisher)/launch/aruco_block_pose_publish.launch">
 	</include>
+	<include file="$(find grab_publisher)/launch/grab_publish.launch">
+	</include>
 
 	<!-- Map server -->
 	<node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
