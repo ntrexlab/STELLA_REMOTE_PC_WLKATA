@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="grab_publisher" type="grab_publish.py" name="grab_publisher"  output="screen">
+  </node>
+</launch>
+

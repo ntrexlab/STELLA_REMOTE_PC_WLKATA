@@ -1,0 +1,20 @@
+<launch>
+  <node name='visual_tracker' pkg="stella_color_block_detection" type="stella_color_block_detection.py">
+    <!-- color or the target in HSV color space -->
+    <rosparam ns='target'>
+      upper : [0, 110, 90]
+      lower : [19, 255, 255]
+      <!-- red -->
+      <!-- upper : [0, 110, 90] -->
+      <!-- lower : [19, 255, 255] -->
+      <!-- orange -->
+      <!-- upper : [0, 17, 211] -->
+      <!-- lower : [30, 81, 255] -->
+    </rosparam>
+    <rosparam ns='pictureDimensions'>
+      <!-- Picture dimensions in pixel -->
+      pictureHeight: 480
+      pictureWidth: 640
+    </rosparam>
+  </node>
+</launch>
