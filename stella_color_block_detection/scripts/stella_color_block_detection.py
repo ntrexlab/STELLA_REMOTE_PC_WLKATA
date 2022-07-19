@@ -19,7 +19,7 @@ class ColorBlockDetection:
 		self.pictureHeight= rospy.get_param('~pictureDimensions/pictureHeight')
 		self.pictureWidth = rospy.get_param('~pictureDimensions/pictureWidth')
 
-		im_sub =rospy.Subscriber('camera', Image, self.trackObject)
+		im_sub =rospy.Subscriber('camera_for_wlkata', Image, self.trackObject)
 		self.pub = rospy.Publisher('color_block_detection_image', Image, queue_size=1)  
 	
 	def trackObject(self, image_data):
