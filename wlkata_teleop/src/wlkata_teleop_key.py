@@ -32,6 +32,21 @@ from geometry_msgs.msg import Pose
 from std_msgs.msg import Bool
 import sys, select, termios, tty
 
+msg = """
+Control Your WLKATA to Grab the Block!
+--------------------------------------
+When you arrive your goal, 
+press key to grab/put down the block!
+. : Grab the block
+/ : Put down the bolck 
+CTRL-C to quit
+"""
+
+e = """
+Error!!!
+"""
+
+
 def get_key():
 	tty.setraw(sys.stdin.fileno())
 	rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
@@ -58,40 +73,44 @@ if __name__=="__main__":
 	p.position.z = 230.4
 	g = Bool()
 
-	while(1):
-		key = get_key()
-		if key == 'w' :
-			p.position.x = p.position.x + 5.0
-			pub_pose.publish(p)
-		elif key == "x" :
-			p.position.x = p.position.x - 5.0
-			pub_pose.publish(p)
-		elif key == "a" :
-			p.position.y = p.position.y + 5.0
-			pub_pose.publish(p)
-		elif key == "d" :
-			p.position.y = p.position.y - 5.0
-			pub_pose.publish(p)
-		elif key == "e" :
-			p.position.z = p.position.z + 5.0
-			pub_pose.publish(p)
-		elif key == "c" :
-			p.position.z = p.position.z - 5.0
-			pub_pose.publish(p)
-		elif key == "h" :
-			p.position.x = 198.6
-			p.position.y = 0.0
-			p.position.z = 230.4
-			pub_pose.publish(p)
-		elif key == '.':
-			g.data = True
-			pub_gripper.publish(g)
-		elif key == '/':
-			g.data = False
-			pub_gripper.publish(g)
+	try:
+		rospy.loginfo(msg)
+		while(1):
+			key = get_key()
+			if key == 'w' :
+				p.position.x = p.position.x + 5.0
+				pub_pose.publish(p)
+			elif key == "x" :
+				p.position.x = p.position.x - 5.0
+				pub_pose.publish(p)
+			elif key == "a" :
+				p.position.y = p.position.y + 5.0
+				pub_pose.publish(p)
+			elif key == "d" :
+				p.position.y = p.position.y - 5.0
+				pub_pose.publish(p)
+			elif key == "e" :
+				p.position.z = p.position.z + 5.0
+				pub_pose.publish(p)
+			elif key == "c" :
+				p.position.z = p.position.z - 5.0
+				pub_pose.publish(p)
+			elif key == "h" :
+				p.position.x = 198.6
+				p.position.y = 0.0
+				p.position.z = 230.4
+				pub_pose.publish(p)
+			elif key == '.':
+				g.data = True
+				pub_gripper.publish(g)
+			elif key == '/':
+				g.data = False
+				pub_gripper.publish(g)
 
-		else:
-			if key == '\x03':
-				break
+			else:
+				if key == '\x03':
+					break
 		
-		rate.sleep()
+			rate.sleep()
+	except:
+		rospy.loginfo(msg)
