@@ -33,12 +33,24 @@ from std_msgs.msg import Bool
 import sys, select, termios, tty
 
 msg = """
-Control Your WLKATA to Grab the Block!
+Control Your WLKATA!
 --------------------------------------
-When you arrive your goal, 
-press key to grab/put down the block!
-. : Grab the block
-/ : Put down the bolck 
+Wait until WLKATA go Home position, 
+and control the WLKATA!
+
+Moving around:
+        w         e
+   a         d         h
+        x         c         ./ 
+
+w/x : increase/decrease X postion
+a/d : increase/decrease Y position
+e/c : increase/decrease Z position(height)
+
+h   : Home position
+
+.,/ : close/open the gripper
+ 
 CTRL-C to quit
 """
 
@@ -75,6 +87,7 @@ if __name__=="__main__":
 
 	try:
 		rospy.loginfo(msg)
+		pub_pose.publish(p)
 		while(1):
 			key = get_key()
 			if key == 'w' :
