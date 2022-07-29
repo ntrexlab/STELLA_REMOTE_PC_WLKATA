@@ -31,11 +31,12 @@ import rospy
 from geometry_msgs.msg import Pose
 from std_msgs.msg import Bool
 import sys, select, termios, tty
+import time
 
 msg = """
 Control Your WLKATA!
 --------------------------------------
-Wait until WLKATA go Home position, 
+Wait until WLKATA Homing finished, 
 and control the WLKATA!
 
 Moving around:
@@ -47,9 +48,9 @@ w/x : increase/decrease X postion
 a/d : increase/decrease Y position
 e/c : increase/decrease Z position(height)
 
-h   : Home position
+h   : Homing
 
-.,/ : close/open the gripper
+.,/ : open/close the gripper
  
 CTRL-C to quit
 """
@@ -78,16 +79,22 @@ if __name__=="__main__":
 	rospy.init_node('pose_node')
 	pub_pose = rospy.Publisher('pose',Pose,queue_size=10)
 	pub_gripper = rospy.Publisher('gripper',Bool,queue_size=10)
+	pub_homing = rospy.Publisher('homing',Bool,queue_size=10)
+
 	rate = rospy.Rate(10)
 	p = Pose()
 	p.position.x = 198.6
 	p.position.y = 0.0
 	p.position.z = 230.4
 	g = Bool()
+	h = Bool()
 
 	try:
 		rospy.loginfo(msg)
-		pub_pose.publish(p)
+		time.sleep(1)
+		h.data = True
+		pub_homing.publish(h)		
+		rate.sleep()
 		while(1):
 			key = get_key()
 			if key == 'w' :
@@ -109,10 +116,8 @@ if __name__=="__main__":
 				p.position.z = p.position.z - 5.0
 				pub_pose.publish(p)
 			elif key == "h" :
-				p.position.x = 198.6
-				p.position.y = 0.0
-				p.position.z = 230.4
-				pub_pose.publish(p)
+				h.data = True
+				pub_homing.publish(h)
 			elif key == '.':
 				g.data = True
 				pub_gripper.publish(g)
