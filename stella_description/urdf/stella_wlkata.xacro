@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <robot name="stella_wlkata" xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:property name="PI" value="3.1415926535897931"/>
-  <xacro:property name="bodyHeight" value="0.253"/>
+  <xacro:property name="bodyHeight" value="0.470"/>
   <xacro:property name="bodyLength" value="0.44"/>
   <xacro:property name="bodyWidth" value="0.38"/>
-  <xacro:property name="bodyMass" value="7.18"/>
+  <xacro:property name="bodyMass" value="12.00"/>
   
   <xacro:include filename="$(find stella_description)/urdf/materials.xacro"/>
 
@@ -26,7 +26,7 @@
     </visual>
 
     <collision>
-      <origin xyz="0 0 ${bodyHeight/2}" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <box size="${bodyLength} ${bodyWidth} ${bodyHeight}"/>
       </geometry>
