@@ -39,7 +39,7 @@ class ColorBlockDetection:
 	
 		# clean that up a little, the iterations are pretty much arbitrary
 		mask = cv2.erode(org_mask, None, iterations=4)
-		mask = cv2.dilate(mask,None, iterations=3)
+		mask = cv2.dilate(mask,None, iterations=4)
 
 		# find contours of the object
 		contours = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
@@ -50,7 +50,7 @@ class ColorBlockDetection:
 			center = np.round(centerRaw).astype(int)
 			size = np.round(size).astype(int)
 
-			if(max(size[0],size[1])/min(size[0],size[1]) > 1.2):
+			if(max(size[0],size[1])/min(size[0],size[1]) > 1.1):
 				image_msg = self.bridge.cv2_to_imgmsg(frame,"bgr8")
 				self.pub.publish(image_msg)
 				return
@@ -62,9 +62,10 @@ class ColorBlockDetection:
 				self.pub.publish(image_msg)
 				return
 
-			if(size < 19):size=19
+			#if(size < 19):size=19
 
 			distance_x = 12/size
+			#rospy.logwarn(distance_x)
 			distance_y = 0.52*distance_x*(center[0]-320)/320*-1
 			distance_z = 0.39*distance_x*(center[1]-240)/240*-1
 			rotation = int(rotation) * -1
@@ -79,7 +80,7 @@ class ColorBlockDetection:
 			rect = cv2.minAreaRect(contour)
 			box = cv2.boxPoints(rect)
 			box = np.int0(box)
-			cv2.drawContours(frame,[box],-0,(0,255,0),3)
+			cv2.drawContours(frame,[box],-0,(0,255,0),2)
 			image_msg = self.bridge.cv2_to_imgmsg(frame,"bgr8")
 			self.pub.publish(image_msg)
 			return
@@ -94,6 +95,3 @@ if __name__ == '__main__':
 		rospy.spin()
 	except rospy.ROSInterruptException:
 		rospy.logwarn('failed')
-
-
-

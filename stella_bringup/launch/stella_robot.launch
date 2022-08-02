@@ -5,8 +5,6 @@
 	</include>
 	<include file="$(find ydlidar)/launch/stella_lds.launch">
 	</include>
-	<include file="$(find stella_wlkata)/launch/stella_wlkata.launch">
-	</include>
-    <include file="$(find stella_camera)/launch/stella_camera.launch">
-	</include>
+	<!--include file="$(find astra_camera)/launch/astrapro.launch"-->
+	<!--/include-->
 </launch>

@@ -53,8 +53,8 @@ if __name__=="__main__":
 		Rotation = s[index_Rotation: index_End - 14]
 		Translation = Translation.split(',')
 		Rotation = Rotation.split(',')
-		p.position.x = float(Translation[0])
-		p.position.y = float(Translation[1])
+		p.position.x = float(Translation[0]) + 0.05
+		p.position.y = float(Translation[1]) + 0.015
 		p.position.z = float(Translation[2])
 		p.orientation.x = float(Rotation[0])
 		p.orientation.y = float(Rotation[1])

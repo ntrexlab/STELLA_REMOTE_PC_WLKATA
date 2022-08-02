@@ -59,14 +59,15 @@ aruco::CameraParameters aruco_ros::rosCameraInfo2ArucoCamParams(const sensor_msg
 tf::Transform aruco_ros::arucoMarker2Tf(const aruco::Marker &marker)
 {
   tf2::Transform tf2_tf = arucoMarker2Tf2(marker);
+
   return tf::Transform(
         tf::Matrix3x3(tf::Quaternion(tf2_tf.getRotation().x(),
                                      tf2_tf.getRotation().y(),
                                      tf2_tf.getRotation().z(),
                                      tf2_tf.getRotation().w())),
-                      tf::Vector3(tf2_tf.getOrigin().x(),
-                                  tf2_tf.getOrigin().y(),
-                                  tf2_tf.getOrigin().z()));
+                      tf::Vector3(tf2_tf.getOrigin().z(),
+                                  tf2_tf.getOrigin().x()*-1,
+                                  tf2_tf.getOrigin().y()*-1));
 }
 tf2::Transform aruco_ros::arucoMarker2Tf2(const aruco::Marker &marker)
 {

@@ -23,7 +23,7 @@
 	<!-- rviz -->
 	<group if="$(arg open_rviz)"> 
 	<node pkg="rviz" type="rviz" name="rviz" required="true"
-	      args="-d $(find stella_bringup)/rviz/stella_wlkata.rviz"/>
+	      args="-d $(find stella_bringup)/rviz/stella_wlkata_aruco.rviz"/>
 	</group>	
 </launch>
 
